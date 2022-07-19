@@ -19,7 +19,7 @@ parser = argparse.ArgumentParser(description='PyTorch CIFAR10 Training')
 parser.add_argument('--train_data_path', '-trd', default='data/train', type=str, help='training data path')
 parser.add_argument('--test_data_path', '-ted', default='data/test', type=str, help='test data path')
 parser.add_argument('--epochs', '-e', default=100, type=int, help='training epochs')
-parser.add_argument('--lr', default=0.1, type=float, help='learning rate')
+parser.add_argument('--lr', default=0.01, type=float, help='learning rate')
 parser.add_argument('--resume', '-r', action='store_true',
                     help='resume from checkpoint')
 args = parser.parse_args()
@@ -143,14 +143,9 @@ def test(epoch):
     acc = 100.*correct/total
     if acc > best_acc:
         print('Saving..')
-        state = {
-            'net': net.state_dict(),
-            'acc': acc,
-            'epoch': epoch,
-        }
         if not os.path.isdir('checkpoint'):
             os.mkdir('checkpoint')
-        torch.save(state, './checkpoint/ckpt.pth')
+        torch.save(net, './checkpoint/ckpt.pth')
         best_acc = acc
 
 
