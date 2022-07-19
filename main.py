@@ -51,7 +51,7 @@ trainloader = torch.utils.data.DataLoader(
 #testset = torchvision.datasets.CIFAR10(
 #    root='./data', train=False, download=True, transform=transform_test)
 
-testset = torchvision.datasets.ImageFolder(args.test_data_path, transform=transform_train)
+testset = torchvision.datasets.ImageFolder(args.test_data_path, transform=transform_test)
 
 testloader = torch.utils.data.DataLoader(
     testset, batch_size=100, shuffle=False, num_workers=2)
