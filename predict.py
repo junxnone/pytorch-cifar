@@ -8,13 +8,13 @@ import numpy as np
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 parser = argparse.ArgumentParser(description='PyTorch CIFAR10 Testing')
 parser.add_argument('--test_data_path', '-ted', default='data/test', type=str, help='test data path')
+parser.add_argument('--model_file', '-m', default='/cnvrg/checkpoint/ckpt.pth', type=str, help='test model')
 parser.add_argument('--input_image', '-i', default='none', type=str, help='test image')
 args = parser.parse_args()
 
 classes = ('plane', 'car', 'bird', 'cat', 'deer',
         'dog', 'frog', 'horse', 'ship', 'truck')
-model_file = "checkpoint/ckpt.pth"
-model  = torch.load(model_file, map_location='cpu')
+model  = torch.load(args.model_file, map_location='cpu')
 model = model.to(device)
 model.eval()
 
