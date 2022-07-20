@@ -145,7 +145,7 @@ def test(epoch):
         print('Saving..')
         if not os.path.isdir('checkpoint'):
             os.mkdir('checkpoint')
-        torch.save(net, './checkpoint/ckpt.pth')
+        torch.save(net, './output/ckpt.pth')
         best_acc = acc
 
 
