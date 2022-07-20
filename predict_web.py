@@ -13,7 +13,12 @@ model_file = '/cnvrg/checkpoint/ckpt.pth'
 model  = torch.load(model_file, map_location='cpu')
 model = model.to(device)
 model.eval()
-
+def install_req():
+    command = [
+        'pip3 install torch torchvision',
+    ]
+    subprocess.call(command)
+install_req()
 def predict_image(file_path):
     image = torch.tensor(np.array(Image.open(file_path)))
     image = torch.reshape(image,(1,3,32,32)).float()
