@@ -20,4 +20,4 @@ if __name__ == '__main__':
     dummy_input = torch.randn(1, 3, 32, 32)
     torch.onnx.export(model, (dummy_input, ), 'output/model.onnx')
 
-    execute_mo('output/model.onnx', 'FP32', 'cifar', 'FP32')
+    execute_mo('output/model.onnx', 'output/FP32', 'cifar', 'FP32')
