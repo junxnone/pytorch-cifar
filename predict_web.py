@@ -9,7 +9,7 @@ device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
 classes = ('plane', 'car', 'bird', 'cat', 'deer',
         'dog', 'frog', 'horse', 'ship', 'truck')
-model_file = 'output/ckpt.pth'
+model_file = 'ckpt.pth'
 model  = torch.load(model_file, map_location='cpu')
 model = model.to(device)
 model.eval()
