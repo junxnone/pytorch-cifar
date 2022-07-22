@@ -18,6 +18,6 @@ if __name__ == '__main__':
     model  = torch.load(model_file, map_location='cpu')
 
     dummy_input = torch.randn(1, 3, 32, 32)
-    torch.onnx.export(model.module, (dummy_input, ), 'output/model.onnx')
+    torch.onnx.export(model, (dummy_input, ), 'output/model.onnx')
 
     execute_mo('output/model.onnx', 'FP32', 'cifar', 'FP32')
