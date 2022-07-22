@@ -4,6 +4,8 @@ import argparse
 import torchvision.transforms as transforms
 from PIL import Image
 import numpy as np
+from cnvrg import Endpoint
+e = Endpoint()
 
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
@@ -21,4 +23,5 @@ def predict_image(file_path):
     output = model(input)
     _, pred = output.topk(5, 1, largest=True, sorted=True)
     result = f'predict: {classes[pred[0][0]]}'
+    e.log_metric("class", classes[pred[0][0]])
     return result
