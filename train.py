@@ -13,7 +13,8 @@ import argparse
 
 from models import *
 from utils import progress_bar
-
+from cnvrg import Endpoint
+e = Endpoint()
 
 parser = argparse.ArgumentParser(description='PyTorch CIFAR10 Training')
 parser.add_argument('--train_data_path', '-trd', default='data/train', type=str, help='training data path')
@@ -117,7 +118,7 @@ def train(epoch):
 
         progress_bar(batch_idx, len(trainloader), 'Loss: %.3f | Acc: %.3f%% (%d/%d)'
                      % (train_loss/(batch_idx+1), 100.*correct/total, correct, total))
-
+    e.log_param("accuracy", 1.0*correct/total)
 
 def test(epoch):
     global best_acc
@@ -147,6 +148,7 @@ def test(epoch):
             os.mkdir('checkpoint')
         torch.save(net, './output/ckpt.pth')
         best_acc = acc
+    e.log_param("val_accuracy", 1.0*correct/total)
 
 
 for epoch in range(start_epoch, start_epoch+args.epochs):
