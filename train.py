@@ -13,8 +13,8 @@ import argparse
 
 from models import *
 from utils import progress_bar
-from cnvrg import Endpoint
-e = Endpoint()
+from cnvrg import Experiment
+e = Experiment()
 
 parser = argparse.ArgumentParser(description='PyTorch CIFAR10 Training')
 parser.add_argument('--train_data_path', '-trd', default='data/train', type=str, help='training data path')
