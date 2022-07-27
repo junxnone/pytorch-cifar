@@ -118,7 +118,8 @@ def train(epoch):
 
         progress_bar(batch_idx, len(trainloader), 'Loss: %.3f | Acc: %.3f%% (%d/%d)'
                      % (train_loss/(batch_idx+1), 100.*correct/total, correct, total))
-    e.log_metric("accuracy", 1.0*correct/total)
+    e.log_metric("tr_accuracy", 1.0*correct/total)
+    print("cnvrg_linechart_{} value: {}".format('accuracy', 1.0*correct/total))
 
 def test(epoch):
     global best_acc
@@ -148,7 +149,8 @@ def test(epoch):
             os.mkdir('checkpoint')
         torch.save(net, './output/ckpt.pth')
         best_acc = acc
-    e.log_metric("val_accuracy", 1.0*correct/total)
+    e.log_metric("tval_accuracy", 1.0*correct/total)
+    print("cnvrg_linechart_{} value: {}".format('val_accuracy', 1.0*correct/total))
 
 
 for epoch in range(start_epoch, start_epoch+args.epochs):
