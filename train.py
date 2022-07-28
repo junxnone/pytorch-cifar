@@ -17,10 +17,11 @@ from cnvrg import Experiment
 e = Experiment()
 
 parser = argparse.ArgumentParser(description='PyTorch CIFAR10 Training')
+parser.add_argument('--model', '-m', default='mobilenetv2', type=str, help='training model')
 parser.add_argument('--train_data_path', '-trd', default='data/train', type=str, help='training data path')
 parser.add_argument('--test_data_path', '-ted', default='data/test', type=str, help='test data path')
 parser.add_argument('--epochs', '-e', default=100, type=int, help='training epochs')
-parser.add_argument('--lr', default=0.1, type=float, help='learning rate')
+parser.add_argument('--lr', default=0.01, type=float, help='learning rate')
 parser.add_argument('--resume', '-r', action='store_true',
                     help='resume from checkpoint')
 args = parser.parse_args()
@@ -61,15 +62,24 @@ classes = ('plane', 'car', 'bird', 'cat', 'deer',
            'dog', 'frog', 'horse', 'ship', 'truck')
 
 # Model
-print('==> Building model..')
-# net = VGG('VGG19')
-# net = ResNet18()
+print(f'==> Building model.. {args.model}')
+net = MobileNetV2()
+if args.model == "vgg":
+    net = VGG('VGG19')
+elif args.model == "resnet18":
+    net = ResNet18()
+elif args.model == "densenet181":
+    net = DenseNet121()
+elif args.model == "mobilenet":
+    net = MobileNet()
+elif args.model == "mobilenetv2":
+    net = MobileNetV2()
+
+# net = ResNeXt29_2x64d()
 # net = PreActResNet18()
 # net = GoogLeNet()
-# net = DenseNet121()
-# net = ResNeXt29_2x64d()
 # net = MobileNet()
-net = MobileNetV2()
+#net = MobileNetV2()
 # net = DPN92()
 # net = ShuffleNetG2()
 # net = SENet18()
